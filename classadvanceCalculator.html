@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator using js class</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            font-family: Gotham Rounded, sans-serif;
+            font-weight: bold;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background-color:blueviolet;
+        }
+        .container {
+            position: relative;
+            display: grid;
+            justify-content: center;
+            align-content: center;
+            grid-template-columns: auto auto auto;
+            grid-template-rows: minmax(120px, auto);
+            width: 60rem;
+            top: 4rem;
+            left: 12rem; 
+            /* height: 60px; */
+         
+
+            
+        }
+        button {
+            position: relative;
+            height: 0.2rem;
+            padding: 30px 1rem;
+            border:1px solid yellow;
+            font-size: 1.4rem;
+            background-color:yellowgreen;
+            
+       
+        }
+        button:hover {
+            background-color: rebeccapurple;
+
+        }
+        button data-operation:active {
+            color: rgb(190, 11, 11);
+        }
+        .previous-element {
+            position: relative;
+            width: 23rem;
+            height: 3.8rem;
+            left: 0.1rem;
+            top: 3.9rem;
+            text-align: right;
+            font-size: 1.5rem;
+            background-color:royalblue;
+            cursor: pointer;
+            color: grey;
+        }
+        
+        .current-element {
+            position: relative;
+            background-color: rosybrown;
+            width: 40vw;
+            height: 3.6rem;
+            top: 3.9rem;
+            left: 0.1rem;
+            border-left: #CBCE91FF;
+            text-align: right;
+           font-size: 2.5rem;
+           cursor: pointer;
+           background-color: blueviolet;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div data-previous-operand class="previous-element"></div>
+        <div data-current-operand class="current-element">0</div>
+         <button data-delete>DEl</button>
+         <button data-number>1</button>
+         <button data-number>2</button>
+         <button data-operation>/</button>
+         <button data-number>3</button>
+         <button data-number>4</button>
+         <button data-operation>*</button>
+         <button data-number>4</button>
+         <button data-number>5</button>
+         <button data-operation>+</button>
+         <button data-number>6</button>
+         <button data-number>7</button>
+         <button data-operation>-</button>
+         <button data-number>8</button>
+         <button data-number>9</button>
+         <button data-number>.</button>
+         <button data-number>0</button>
+         <button data-clear>AC</button>
+         <button data-equals class="span-two">=</button>
+
+
+
+       
+    </div>
+    <script>
+
+        //let givies the simple style to the html buttons;
+        let active = document.querySelector('.span-two');
+            active.style.backgroundColor = "royalblue";
+
+
+class Calculator {
+    constructor(datacurrentoperand, datapreviousoperand){
+        this.datacurrentoperand = datacurrentoperand;
+        this.datapreviousoperand = datapreviousoperand;
+        this.clear();
+    }
+
+    clear() {
+this.currentoperand = "";
+this.previousoperand = "";
+this.operation = undefined;
+    }
+
+
+    appendNumber(number) {
+        debugger;
+       if( number == '.' && this.currentoperand.includes('.'))   return ;
+       this.currentoperand += number.toString();
+    }
+
+
+    deleteOf(){
+        this.currentoperand = this.currentoperand.toString().slice(0,-1)
+    }
+        
+    chooseOperation(operator) {
+if(this.currentoperand == '') return ; // if current operand is empty return function end here;
+if(isNaN(this.currentoperand)) return ;
+if(this.previousoperand !== '') {
+    this.doOperation()
+}
+       this.operation = operator;
+       this.previousoperand = this.currentoperand + this.operation; 
+       this.currentoperand = '';
+    }
+
+    //Main logic starts here;
+    doOperation() {
+let comp;
+let pre = parseFloat(this.previousoperand);
+let cur = parseFloat(this.currentoperand);
+if(isNaN(pre) || isNaN(cur)) return ;  //if previous value and current valuel are not a number then return it means function end here; 
+
+  switch(this.operation) {
+    case '+':
+    comp =  pre + cur;
+    break;  
+
+    case '-':
+        comp =  pre - cur;
+        break;
+
+        case '/':
+            comp =  pre / cur;
+            break;
+
+            case '*':
+                comp = pre * cur;
+                break;
+
+                    default:
+                        return;
+
+  }
+  this.currentoperand = comp;
+  this.previousoperand = '';
+  this.operation = undefined;
+    };
+
+//Upadate the display; 
+   updateDisplay() {
+   this.datacurrentoperand.innerText = this.currentoperand;
+   this.datapreviousoperand.innerText = this.previousoperand;
+   };
+
+};
+
+
+
+
+
+
+
+    let button = document.querySelectorAll('[data-number]');
+    let operator = document.querySelectorAll('[data-operation]');
+    let datadelete = document.querySelector('[data-delete]');
+    let dataClear = document.querySelector('[data-clear]');
+    let spantwo = document.querySelector('[data-equals]');
+    let datapreviousoperand = document.querySelector('[data-previous-operand]'); 
+    let datacurrentoperand = document.querySelector('[data-current-operand]'); 
+    
+
+//our new value;
+    let myCalculator = new Calculator(datacurrentoperand, datapreviousoperand);
+
+
+
+  // make click all the number button
+   Array.from(button).forEach(button =>  {
+button.addEventListener('click', function(e) {
+    myCalculator.appendNumber(e.target.innerText);
+    myCalculator.updateDisplay();
+
+});
+
+    });
+
+
+    // make click and evaluate the operation according to the operators; 
+    Array.from(operator).forEach((button) =>  {
+button.addEventListener('click', function(e) {
+    myCalculator.chooseOperation(button.innerText);
+    myCalculator.updateDisplay();
+
+});
+
+    });
+
+
+    // assing the  value 
+    spantwo.addEventListener('click', () => {
+myCalculator.doOperation();
+myCalculator.updateDisplay();
+    });
+
+
+    // delete the value one by one;  
+    datadelete.addEventListener('click', () => {
+      myCalculator.deleteOf();
+myCalculator.updateDisplay();
+    });
+    
+
+// delete the value all by ones
+   dataClear.addEventListener('click', () => {
+      myCalculator.clear();
+myCalculator.updateDisplay();
+    });
+    </script>
+</body>
+</html>

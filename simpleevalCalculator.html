@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator using simple eval and loop.</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            font-family: 'open sans', sans-serif;
+            background-color: lightgreen
+        }
+
+        .container {
+            position: relative;
+            background-color: rebeccapurple !important;
+            width: 30rem;
+            height: 93vh;
+            top: 6vh;
+            left: 26rem;
+            border-radius: 7rem;
+
+
+        }
+
+        .showInput {
+            position: absolute;
+            background-color: lightblue;
+            width: 23.9rem;
+            height: 4rem;
+            top: 2rem;
+            left: 3.1rem;
+            background-color: rgb(rgba(255, 0, 0, 0.089), rgba(0, 128, 0, 0.212), rgba(0, 0, 255, 0.139));
+            font-weight: bolder;
+            font-size: 2rem;
+            text-align: right;
+            border-radius: 0.6rem;
+
+        }
+
+        button {
+            float: left;
+            width: 80px;
+            height: 60px;
+            position: relative;
+            top: 11rem;
+            left: 2.3rem;
+            box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+            border-radius: 50%;
+            padding: 1rem, 12rem;
+            font-size: 1rem;
+
+            border: none;
+            margin: 12px;
+            background-color: rebeccapurple;
+            font-weight: bold;
+
+        }
+
+        .previous {
+            position: relative;
+            top: 5vh;
+            text-align: center;
+            font-size: 0.99rem;
+            opacity: 50px;
+
+
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <p class="previous" id="previousResult"></p>
+            <p class="showInput" id="result">0</p>
+            <div class=" keybord">
+                <button class="Clear">C</button>
+                <button class="clearAll">CA</button>
+                <button class="button">%</button>
+                <button class="button">/</button>
+                <button class="button">-</button>
+                <button class="button">+</button>
+                <button class="button">*</button>
+                <button class="button">7</button>
+                <button class="button">8</button>
+                <button class="button">9</button>
+                <button class="button">4</button>
+                <button class="button">5</button>
+                <button class="button">6</button>
+                <button class="button">1</button>
+                <button class="button">2</button>
+                <button class="button">2</button>
+                <button class="button">3</button>
+                <button class="button">0</button>
+                <button class="button">=</button>
+            </div>
+        </div>
+    </header>
+
+    <script>
+
+        let pre = document.getElementById('previousResult')
+        let show = document.getElementById('result');
+        let btn = document.querySelectorAll('.button');
+        let myInput = "";
+
+
+
+
+        Array.from(btn).map(button => {
+            button.addEventListener('click', (e) => {
+
+
+
+
+                if (e.target.innerHTML == "=") {
+
+                    myInput = eval(myInput);
+                    show.innerHTML = myInput;
+
+                }
+
+
+
+                else {
+                    myInput = myInput + e.target.innerText;
+                    show.innerHTML = myInput;
+                    pre.innerHTML = show.innerHTML;
+                }
+
+            });
+        });
+
+
+
+
+
+        //function to clear the value one by one;
+        let Clear = document.querySelector('.Clear');
+        Clear.addEventListener('click', () => {
+            myInput = myInput.slice(0, -1);
+            show.innerHTML = myInput;
+
+        });
+
+
+        // function to clear all the value;
+        let allClear = document.querySelector('.clearAll');
+        allClear.addEventListener('click', () => {
+            myInput = " ";
+            show.innerHTML = "0";
+            pre.innerHTML = "";
+        });
+
+    </script>
+
+</body>
+
+</html>
