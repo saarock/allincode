@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+
+    <title>Simple sample of async and await</title>
+    <style>
+        body {
+            background-color: lightblue;
+          
+        }
+
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            position: sticky;
+    
+        }
+
+
+        .sticky {
+            position: sticky;
+            z-index: 1;
+            top: 0;
+        }
+
+
+        .box {
+            width: 40rem;
+            height: 43rem;
+            text-align: center;
+            align-items: center;
+            padding: 2rem;
+            border-radius: 2rem;
+            margin: 2rem;
+            background-color: rebeccapurple;
+        }
+
+        .baby {
+            font-weight: bold;
+            font-size: 2rem;
+            font-style: italic;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        img {
+            border: 2px solid black;
+            border-radius: 2rem;
+        }
+
+        .btn {
+            background-color: rebeccapurple;
+            margin: 1rem;
+            width: 11rem;
+            font-weight: bold;
+            border: none;
+            box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+
+
+
+        }
+        .btnn{
+            background-color: rebeccapurple;
+            margin: 1rem;
+            width: 11rem;
+            font-weight: bold;
+            border: none;
+            box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  
+        }
+
+        .hover {
+
+            background-color: yellowgreen;
+            border-radius: 2rem;
+        }
+
+        .par {
+            font-weight: bold;
+        }
+
+        @media (max-width :700px) {
+            body {
+                background-color: bisque;
+            }
+
+            .container {
+                position: relative;
+                left: 0;
+            }
+
+            .box {
+                width: 100%;
+                height: 60%;
+
+
+            }
+            .navbar{
+                width: 100%;
+            }
+        }
+
+        .btn {
+            width: 50%;
+
+        }
+
+        .posters {
+            width: 100%;
+        }
+
+        .ok {
+            background-color: red;
+        }
+        
+    </style>
+</head>
+
+<body>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <div class="header">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-dark ">
+            <a class="navbar-brand" href="#">The movies
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" id="btn1" type="search" placeholder="Search the movies.."
+                        aria-label="Search">
+                    <button class="btnn btn-outline-success my-2 my-sm-0" type="submit" id="search">Search</button>
+                </form>
+            </div>
+        </nav>
+
+    </div>
+
+
+    <main>
+
+        <div class="d-flex flex-column container">
+
+        </div>
+
+    </main>
+    <script>
+
+        // getElemlentByClassName  returns html collection which support live node list.
+        let btn = document.getElementsByClassName('btn');
+        let classes = document.getElementsByClassName('box');
+        //it returns the first target element.
+        let container = document.querySelector('.container');
+        let nav = document.querySelector('.header');
+
+
+
+        let html = "";
+        const APIURL =
+            "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=04c35731a5ee918f014970082a0088b1&page=1";
+        const IMGPATH = "https://image.tmdb.org/t/p/w1280";
+        const SEARCHAPI =
+            "https://api.themoviedb.org/3/search/movie?&api_key=04c35731a5ee918f014970082a0088b1&query=";
+        let async = async function (api) {
+            const response = await fetch(api)
+            const data = await response.json();
+            show(data.results)
+            // console.log(data)
+        }
+        function show(data) {
+            // console.log(data)
+
+            data.forEach(element => {
+
+                // console.log(element)
+                html += `     
+
+<div class="box">
+            <h2 class="baby">${element.title}</h2>
+
+        <p class = 'par '>IMD:${element.vote_average
+                    }</p>
+            <img src="${IMGPATH + element.poster_path}" alt="images" class = "posters" width= '500rem' height= '500rem'>
+            <button class="btn" onmouseover = "mouseOver(this) " onmouseout = "mouseLeave(this)">Watch</button>
+        </div>
+
+`
+
+                container.innerHTML += html;
+
+            })
+        }
+        async(APIURL);
+
+
+        let mouseOver = (e) => {
+            console.log('hello world');
+            e.classList.add('hover');
+
+        }
+
+
+        let mouseLeave = (e) => {
+            console.log('hello world');
+            e.classList.remove('hover');
+        }
+
+
+
+
+        let here = nav.getBoundingClientRect().top;
+        // let here = nav.offsetTop;
+        function stickyNav() {
+            //instead of pageyOffSet we can use window.scrollY.. 
+            if (here = window.pageYOffset) {
+                console.log('ehat ar');
+                nav.classList.add('sticky');
+            }
+
+        }
+
+        window.onscroll = function () {
+            stickyNav();
+        }
+
+
+
+        let input = document.getElementById('btn1');
+        let mainDiv = document.getElementsByClassName('box');
+
+
+        input.oninput = function (e) {
+            // console.log(e.target.value);
+            let myValue = e.target.value;
+            // console.log(forSearch)
+            // console.log(input.value);
+            Array.from(mainDiv).forEach((element) => {
+                // console.log(element)
+                let elem = element.getElementsByTagName('h2')[0].innerHTML;
+
+           
+
+                                
+                    if (elem.includes(myValue)) {
+                        // console.log('search done')
+                        element.style.display = "block";
+
+                    } else {
+                        // console.log('Noresult')
+                        element.style.display = "none";
+                      
+                    }
+                   
+
+                })
+            }
+           
+
+        
+
+    </script>
+
+</body>
+
+</html>
