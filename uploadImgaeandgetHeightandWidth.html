@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Img height and width.</title>
+  <style>
+    body {
+      background-color: yellowgreen;
+    }
+
+
+    .header {
+      border: 12px solid tan;
+      width: 40rem;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      position: absolute;
+      align-items: center;
+      background-color: yellowgreen;
+      flex-wrap: wrap;
+      box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+    }
+
+
+    #img {
+      height: 28rem;
+      width: 40rem;
+      background-color: red;
+    }
+
+
+    #upload {
+      height: 2rem;
+      font-size: 1.3rem;
+      height: 3rem;
+      position: absolute;
+      top: 31.2rem;
+      font-weight: bold;
+      box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+
+    }
+
+
+    #height {
+      height: 2rem;
+      font-size: 1rem;
+      background-color: brown;
+
+    }
+
+
+    #width {
+      height: 2rem;
+      font-size: 1rem;
+      background-color: brown;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+
+    <input type="file" id="upload">
+    <img id="img">
+
+    <div class="container">
+
+      <label for="height" style="font-weight: bold;">height</label>
+      <input type="number" name="number5" id="height" placeholder="height...">
+
+      <label for="width" style="font-weight: bold;">width</label>
+
+      <input type="number" name="number5" id="width" placeholder="width">
+    </div>
+  </div>
+  <script>
+
+    let upload = document.getElementById('upload');
+    let img = document.getElementById('img');
+    let height = document.getElementById('height');
+    let width = document.getElementById('width');
+    upload.addEventListener('change', function (e) {
+      console.log(e.target.files[ 0 ]);
+      if (event.target.files[ 0 ].length == 0) return;  //If the user donot select the file the return the function.
+      let here = e.target.files[ 0 ];
+      let myImage = URL.createObjectURL(here);
+
+      img.src = myImage;
+
+      img.addEventListener('load', () => { //If the user select the image then get the image of height and width.
+        let h = img.naturalHeight;
+
+        height.value = h;
+
+        let w = img.naturalWidth;
+        width.value = w;
+
+      })
+    })
+
+
+  </script>
+
+</body>
+
+</html>
