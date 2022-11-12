@@ -1,161 +1,165 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
-  <style>
-    .ccc {
-      padding: 10px;
-      border-radius: 1em;
-      height: 380px;
-      width: 400px;
-      margin: auto;
-      background-color: skyblue;
-      box-shadow: rgba(110, 0, 0, 0, 0, 0.19) 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-      border: 10px rebeccapurple;
-      background-color: black;
-      border-collapse: collapse;
-      max-height: 300%;
-      width: 20%;
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            background-color: antiquewhite;
+        }
+        table,td {
+            border: 2px solid black;
+            font-size: 2rem;
+        }
+        #show {
+            background-color: antiquewhite;
+            height: 2rem;
+            width: 39rem;
+            color: black;
+            font-size: 1.6rem;
+        }
 
-      border-color: skyblue;
-
-    }
-
-    input[type="button"] {
-      width: 87%;
-      padding: 10px 1px;
-      font-size: 20px;
-      font-family: 'Orbitron', sans-serif;
-      background-color: darkblue;
-      outline: none;
-      height: 70%;
-      border-radius: 40%;
+        #number,#operator {
+            /* background-color: black; */
+            color:black;
+            width: 12rem;
+            font-size: 2rem;
+        }
+        #resultShow {
+            /* background-color: black; */
+            color: black;
+            font-size: 2rem;
+            width: 12rem;
 
 
-    }
+        }
+        #clearAll {
+            color:black;
+            width: 12rem;
+            font-size: 2rem;
 
-    input:active[type=button] {
-      background: skyblue;
-      -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
-      -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
-      box-shadow: inset 0px 0px 5px #c1c1c1;
-    }
+        }
+        #clear {
+            color:black;
+            width: 12rem;
+            font-size: 2rem;
 
-    input[type="display-box"] {
-      padding: 10px 10px;
-      font-size: 30px;
-      background-color: whitesmoke;
-      border-radius: 30%;
-    }
+        }
 
-    #aa {
+       
+        .container {
+         display: flex;
+         flex-direction: row;
+         text-align: center;
+         align-items: center;
+         margin: 10rem;
+      
+        
+        }
+        .tables {
+            background-color: blueviolet;
+           
+        }
 
-      background-color: #fb0066;
-    }
-  </style>
+        
+
+            
+        
+
+      
+        
+
+    </style>
 </head>
 
-
-
-
 <body>
+    <div class="container">
+    <table class="tables">
+        <tr>
+            <td colspan="3"><input type="text" id="show"></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="4" id = "number" onclick="showFunction(4)"></td>
+            <td><input type="button" value="3" id = "number" onclick="showFunction(3)"></td>
+            <td><input type="button" value="2" id = "number" onclick="showFunction(2)"></td>
+            <td><input type="button" value="1" id = "number" onclick="showFunction(1)"></td>
+           
+        </tr>
+
+        <tr>
+            
+            <td><input type="button" value="5" id = "number"  onclick="showFunction(5)"></td>
+            <td><input type="button" value="6" id = "number" onclick="showFunction(6)"></td>
+            <td><input type="button" value="7" id = "number" onclick="showFunction(7)" ></td>
+            <td><input type="button" value="-" id = "operator"  onclick="showFunction('-')"></td>
+          
+        
+
+        </tr>
+        <tr>
+            <td><input type="button" value="8" id = "number"  onclick="showFunction(8)"></td>
+            <td><input type="button" value="9" id = "number"  onclick="showFunction(9)"></td>
+            <td><input type="button" value="0" id = "number" onclick="showFunction(0)" ></td>
+            <td><input type="button" value="+" id = "operator"  onclick="showFunction('+')"></td>
+        
+
+        </tr>
+
+        <tr>
+        
+       
+            <td><input type="button" value="/" id = "operator"  onclick="showFunction('/')"></td>
+            <td><input type="button" value="*" id = "operator"  onclick="showFunction('*')"></td>
+            <td><input type="button" value="=" id = "resultShow" ></td>
+            <td><input type="button" value="C" id = "clear"></td> 
+           
 
 
+        </tr>
 
+        <tr>
+            <td><input type="button" value="AC" id = "clearAll"></td> 
 
+        </tr>
+      
+    </table>
+    </div>
+        <script>
 
-  <table class="ccc">
-    <caption>CALCULATOR</caption>
-    <tr>
-      <td colspan="4"><input type="display-box" id="result" disabled></td>
+            let showResult = document.getElementById('show');
+            let showFunction = function(numberandOperator) {
+                // console.log(numberandOperator)
+              
+                showResult.value += numberandOperator;
 
+            }
 
+            let operator = document.querySelector('#resultShow');
+            operator.addEventListener('click', () => {
+                showResult.value = eval(showResult.value);
+            })
 
-    </tr>
-    <tr>
-      <td><input type="button" value="(" onclick="myFunction('(')"></td>
+            let clear = document.querySelector('#clear');
+            clear.addEventListener('click', function() {
+                // console.log('It o')
+        
+                
+                // showResult.value = '';
+                showResult.value = showResult.value.slice(0, -1);
+            })
 
-      <td><input type="button" value=")" onclick="myFunction(')')"></td>
-      <td><input type="button" value="%" onclick="myFunction('%')"></td>
-      <td><input type="button" value="AC" id="aa" name="num" onclick="document.getElementById('result').value = ''" />
-      </td>
+            
+            let clearAll = document.querySelector('#clearAll');
+            clearAll.addEventListener('click', function() {
+                console.log('done')
+                showResult.value = '';
+          
+            })
 
+            
 
-
-
-
-    </tr>
-    <tr>
-      <td><input type="button" value="7" onclick="myFunction(7)"></td>
-
-
-      <td><input type="button" value="8" onclick="myFunction(8)"></td>
-
-
-      <td><input type="button" value="9" onclick="myFunction(9)"></td>
-
-      <td><input type="button" value="/" onclick="myFunction('/')"></td>
-
-
-    <tr>
-      <td><input type="button" value="4" onclick="myFunction(4)"></td>
-      <td><input type="button" value="5" onclick="myFunction(5)"> </td>
-      <td><input type="button" value="6" onclick="myFunction(6)"></td>
-      <td><input type="button" value="*" onclick="myFunction('*')"></td>
-    </tr>
-    <tr>
-      <td><input type="button" value="1" onclick="myFunction(1)"></td>
-      <td><input type="button" value="2" onclick="myFunction(2)"></td>
-      <td><input type="button" value="3" onclick="myFunction(3)"></td>
-      <td><input type="button" value="-" onclick="myFunction('-')"></td>
-    </tr>
-    <tr>
-      <td><input type="button" value="0" onclick="myFunction(0)"></td>
-
-      <td><input type="button" value="." onclick="myFunction('.')"></td>
-
-      <td><input type="button" value="=" onclick="myFunction1()"></td>
-
-      <td><input type="button" value="+" onclick="myFunction('+')"></td>
-    </tr>
-
-
-
-
-
-
-  </table>
-  <script>
-
-    // assing aal the value
-    let result = document.getElementById('result');
-    function myFunction(n) {
-      if (result.value.includes('.', '')) return //includes method takes two argument one is search value and another is start and if . is include in input then block the function and return .
-      result.value += n
-    }
-
-
-    // evaluate the values
-    let myFunction1 = () => {
-      result.value = eval(result.value);
-    }
-
-
-
-
-
-
-
-
-  </script>
-
-
-
-
-
+        </script>
 </body>
-
 </html>
