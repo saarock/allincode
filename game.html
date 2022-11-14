@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TictacGame</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+
+        body {
+            background-color: lightblue;
+        }
+        .container {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        margin: 2.3rem  0 0 0;
+        }
+
+        .main {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        
+
+        }
+        .box {
+            border: 2px solid black;
+            font-size: 3rem;
+            height: 7rem;
+            width: 9rem;
+            font-weight: bold;
+            text-align: center;
+        }
+        .bg1 {
+            border-top: none;
+            border-left: none;
+        }
+
+        .bg2 {
+            border-top: none;
+
+        }
+
+        .bg3 {
+            border-top: none;
+            border-right: none;
+
+        }
+
+        .bg4 {
+            border-left: none;
+
+        }
+
+        .bg5 {
+
+        }
+
+        .bg6 {
+            border-right: none;
+        }
+
+        .bg7 {
+            border-left: none;
+            border-bottom: none ;
+
+        }
+
+        .bg8 {
+            border-bottom: none;
+        } 
+        .bg9 {
+            border-bottom: none;
+            border-right: none;
+        }
+
+        .second {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0 0 0;
+            
+        }
+
+        .small {
+font-size: 3rem;
+font-weight: bold;
+color: blueviolet;
+        }
+
+
+        #btn {
+            border: none;
+            font-size: 2rem;
+            font-weight: bold;
+        background-color: blueviolet;
+        color:  white;
+
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        .header {
+            display: flex;
+            justify-content: center;
+            background-color: rebeccapurple;
+            height: 6rem;
+        }
+
+        .myHeading {
+            /* background-color: red; */
+
+        }
+
+        .h1 {
+            font-size: 4rem;
+            text-transform: uppercase;
+            color: white;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        @media  screen and (max-width: 530px) {
+            .h1{
+                font-size: 2rem;
+                position: relative;
+                top: 1.7rem;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+    <header>
+    <div class="header">
+<div class="myHeading">
+    <h1 class="h1">TictacGame</h1>
+</div>
+</div>
+    </header>
+
+    <main>
+    <div class="container">
+        <div class="main">
+            <div class="box bg1"></div>
+            <div class="box bg2"></div>
+            <div class="box bg3"></div>
+            <div class="box bg4"></div>
+            <div class="box bg5"></div>
+            <div class="box bg6"></div>
+            <div class="box bg7"></div>
+            <div class="box bg8"></div>
+            <div class="box bg9"></div>
+        </div>
+    </div>
+    <div class="second">
+        <div class="box2">
+            <div class="small">O trun</div>
+            <button id="btn">Play again</button>
+        </div>
+    </div>
+    </main>
+    <script>
+
+
+let game =  false;
+const trun = 'X trun';
+const trun1 = 'O trun';
+let x = 'X';
+let o = 'O';
+        let allBox = document.getElementsByClassName('box');
+        let btn = document.querySelector('#btn');
+        let h = document.getElementsByClassName('small')[0];
+
+        
+        Array.from(allBox).forEach((ele) => {
+
+       ele.addEventListener('click', show)
+    });
+
+        function show(e) {
+let c = e.target;
+let output = game? x : o;
+let outputs = game? trun1 : trun;
+letsTry(c, output);
+h.innerText = outputs;
+check()
+
+        }
+  
+
+        function letsTry(c,output) {
+           return c.innerText = output;
+        }
+
+        function check() {
+            game  =! game;
+        }
+
+
+        btn.addEventListener('click', () => {
+            // console.log(true);
+            // Array.from and [...] method are same both makes nodelist from html collection
+            [...allBox].forEach((current) => {
+                current.innerText = '';
+            })
+        })
+
+    </script>
+</body>
+</html>
